@@ -1,6 +1,6 @@
-Append the following at the end of /etc/ufw/after.rules (replace eth0 with your external facing interface):
+### Append the following at the end of /etc/ufw/after.rules (replace eth0 with your external facing interface):
 
-# Put Docker behind UFW
+### Put Docker behind UFW
 ```
 *filter
 :DOCKER-USER - [0:0]
@@ -14,10 +14,11 @@ COMMIT
 ```
 
 And undo any and all of:
-
+```
 Remove "iptables": "false" from /etc/docker/daemon.json
 Revert to DEFAULT_FORWARD_POLICY="DROP" in /etc/default/ufw
 Remove any docker related changes to /etc/ufw/before.rules
+```
 Be sure to test that everything comes up fine after a reboot.
 
 I still believe Docker's out of the box behavior is dangerous and many more people will continue to unintentionally expose internal services to the outside world due to Docker punching holes in otherwise safe iptables configs.
