@@ -1,6 +1,7 @@
 Append the following at the end of /etc/ufw/after.rules (replace eth0 with your external facing interface):
 
 # Put Docker behind UFW
+```
 *filter
 :DOCKER-USER - [0:0]
 :ufw-user-input - [0:0]
@@ -10,6 +11,8 @@ Append the following at the end of /etc/ufw/after.rules (replace eth0 with your 
 -A DOCKER-USER -i eth0 -j ufw-user-input
 -A DOCKER-USER -i eth0 -j DROP
 COMMIT
+```
+
 And undo any and all of:
 
 Remove "iptables": "false" from /etc/docker/daemon.json
